@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.utils.multiclass import type_of_target
+from collections import namedtuple
 
 """
 函数说明:处理训练集得到条件概率
@@ -13,12 +14,6 @@ Returns:
 	p1 - 正例和反例的条件概率
     p1_list - 训练集中正例下各属性的条件概率
     p0_list - 训练集中反例下各属性的条件概率
-Author:
-	polar-region
-Blog:
-	https://github.com/polar-region/Machine-Learning
-Modify:
-	2022-03-08
 """
 def train_melon(X, y):
     m, n = X.shape  # 读取数据集的二维长度
@@ -74,12 +69,6 @@ Parameters:
 
 Returns:
 	求解结果
-Author:
-	polar-region
-Blog:
-	https://github.com/polar-region/Machine-Learning
-Modify:
-	2022-03-08
 """
 def predict_melon(x, p1, p1_list, p0_list):
     n = len(x)

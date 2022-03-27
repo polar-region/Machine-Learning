@@ -5,11 +5,7 @@ import pandas as pd
 
 """
 Author:
-	Jack Cui
-Blog:
-    http://blog.csdn.net/c406495762
-Zhihu:
-    https://www.zhihu.com/people/Jack--Cui/
+	Polar-Region
 Modify:
 	2017-10-10
 """
@@ -128,25 +124,25 @@ def adaClassify(datToClass, classifierArr):
     return np.sign(aggClassEst)
 
 
-def pltStumpBaggingDecisionBound(X_, y_, stumps):
-    pos = y_ == 1
-    neg = y_ == -1
-    x_tmp = np.linspace(0, 1, 600)
-    y_tmp = np.linspace(-0.1, 0.7, 600)
+def pltStumpBaggingDecisionBound(dataArr_, LabelArr_, weakClassArr):
+    pos = LabelArr_ == 1
+    neg = LabelArr_ == -1
+    dataArr_tmp = np.linspace(0, 1, 600)
+    LabelArr_tmp = np.linspace(-0.1, 0.7, 600)
 
-    X_tmp, Y_tmp = np.meshgrid(x_tmp, y_tmp)
-    Z_ = adaClassify(np.c_[X_tmp.ravel(), Y_tmp.ravel()], stumps).reshape(X_tmp.shape)
+    dataArr_tmp_, LabelArr_tmp_ = np.meshgrid(dataArr_tmp, LabelArr_tmp)
+    ClassArr_ = adaClassify(np.c_[dataArr_tmp_.ravel(), LabelArr_tmp_.ravel()], weakClassArr).reshape(dataArr_tmp_.shape)
 
-    plt.contour(X_tmp, Y_tmp, Z_, [0], colors='orange', linewidths=1)
+    plt.contour(dataArr_tmp_, LabelArr_tmp_, ClassArr_, [0], colors='orange', linewidths=1)
 
-    plt.scatter(X_[pos, 0], X_[pos, 1], label='1', color='c')
-    plt.scatter(X_[neg, 0], X_[neg, 1], label='0', color='lightcoral')
+    plt.scatter(dataArr_[pos, 0], dataArr_[pos, 1], label='1', color='c')
+    plt.scatter(dataArr_[neg, 0], dataArr_[neg, 1], label='0', color='lightcoral')
     plt.legend()
     plt.show()
 
 
 if __name__ == '__main__':
-    data_path = r'E:\Code\Machine Learning\Adaboost\melon.txt'
+    data_path = r'E:\Code\Machine-Learning\Adaboost\melon.txt'
 
     data = pd.read_table(data_path, delimiter=' ')
 

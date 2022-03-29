@@ -7,7 +7,7 @@ import pandas as pd
 Author:
 	Polar-Region
 Modify:
-	2017-10-10
+	2022-3-29
 """
 
 
@@ -70,7 +70,7 @@ def buildStump(dataArr, classLabels, D):
     return bestStump, minError, bestClasEst
 
 
-def adaBoostTrainDS(dataArr, classLabels, numIt=10):
+def adaBoostTrainDS(dataArr, classLabels, numIt=1):
     """
     使用AdaBoost算法提升弱分类器性能
     Parameters:
@@ -154,5 +154,6 @@ if __name__ == '__main__':
     weakClassArr, aggClassEst = adaBoostTrainDS(dataArr, LabelArr)
     predictions = adaClassify(dataArr, weakClassArr)
     errArr = np.mat(np.ones((len(dataArr), 1)))
+    print(predictions)
     print('训练集的错误率:%.3f%%' % float(errArr[predictions != np.mat(LabelArr).T].sum() / len(dataArr) * 100))
     pltStumpBaggingDecisionBound(dataArr, LabelArr, weakClassArr)

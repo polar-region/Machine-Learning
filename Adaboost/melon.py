@@ -90,9 +90,7 @@ def createSingleTree(X, y, D, limit_Deep,deep=0):
     node = Node()
     node.deep = deep
 
-    '''
-    当前分支下，样本数量小于等于2 或者 深度达到limit_Deep，直接设置为也节点
-    '''
+    # 当前分支下，样本数量小于等于2 或深度达到limit_Deep，直接设置为叶节点
     if (deep == limit_Deep) | (X.shape[0] <= 2):
         pos_weight = np.sum(D[y == 1])
         neg_weight = np.sum(D[y == -1])
@@ -102,6 +100,9 @@ def createSingleTree(X, y, D, limit_Deep,deep=0):
             node.leaf_class = -1
 
         return node
+    # 如果样本全部属于同一种类，直接设置为叶节点
+    if(np.sum(D[y == 1]) == 0 | np.sum(D[y == -1]) == 0):
+        node.leaf_class = 1 if(np.sum(D[y == 1]) == 0) else 0
 
     feature_index, split_point = chooseFeatureToSplit(X, y, D)
 
@@ -228,7 +229,9 @@ if __name__ == "__main__":
 
     y[y == 0] = -1
 
-    trees, a, agg_est = adaBoostTrain(X, y ,1 ,1)
+    trees, a, agg_est = adaBoostTrain(X, y ,1 ,3)
+
+    print(trees[0].deep)
 
     predictions = adaBoostPredict(X,trees,a)
 

@@ -12,14 +12,17 @@ class Node(object):
         self.right_tree = None
         self.leaf_class = None
 
+'''
+函数说明：计算样本集y下的加权基尼指数
 
+Parameters:
+    y - 数据样本标签
+    D - 样本权重
+    
+Return:  
+    gini - 加权后的基尼指数
+'''
 def gini(y, D):
-    '''
-    计算样本集y下的加权基尼指数
-    :param y: 数据样本标签
-    :param D: 样本权重
-    :return:  加权后的基尼指数
-    '''
     unique_class = np.unique(y)
     total_weight = np.sum(D)
 
@@ -29,16 +32,18 @@ def gini(y, D):
 
     return gini
 
+'''
+函数说明：计算特征a下样本集y的的基尼指数
 
+Parameters:
+    a - 单一特征值
+    y - 数据样本标签
+    D - 样本权重
+
+Return:
+    无
+'''
 def calcMinGiniIndex(a, y, D):
-    '''
-    计算特征a下样本集y的的基尼指数
-    :param a: 单一特征值
-    :param y: 数据样本标签
-    :param D: 样本权重
-    :return:
-    '''
-
     feature = np.sort(a)
     total_weight = np.sum(D)
 
@@ -61,14 +66,15 @@ def calcMinGiniIndex(a, y, D):
 
     return min_gini, min_gini_point
 
-
+'''
+函数
+    param X:
+    param y:
+    param D:
+Returns: 
+    特征索引, 分割点
+'''
 def chooseFeatureToSplit(X, y, D):
-    '''
-    :param X:
-    :param y:
-    :param D:
-    :return: 特征索引, 分割点
-    '''
     gini0, split_point0 = calcMinGiniIndex(X[:, 0], y, D)
     gini1, split_point1 = calcMinGiniIndex(X[:, 1], y, D)
 

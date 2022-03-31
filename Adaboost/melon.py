@@ -41,7 +41,8 @@ Parameters:
     D - 样本权重
 
 Return:
-    无
+    min_gini - 最小基尼值
+    min_gini_point - 最小基尼值所在点
 '''
 def calcMinGiniIndex(a, y, D):
     feature = np.sort(a)
@@ -67,10 +68,12 @@ def calcMinGiniIndex(a, y, D):
     return min_gini, min_gini_point
 
 '''
-函数9
-    param X:
-    param y:
-    param D:
+函数说明：
+
+Parameters:
+    X - 
+    y - 
+    D - 
 Returns: 
     特征索引, 分割点
 '''

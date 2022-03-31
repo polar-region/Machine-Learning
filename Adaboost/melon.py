@@ -67,7 +67,7 @@ def calcMinGiniIndex(a, y, D):
     return min_gini, min_gini_point
 
 '''
-函数
+函数9
     param X:
     param y:
     param D:
